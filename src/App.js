@@ -31,7 +31,7 @@ class App extends React.Component {
     this.handleStartMenuClick = this.handleStartMenuClick.bind(this);
     this.handleSetupClick = this.handleSetupClick.bind(this);
     this.handleSetupSubmission = this.handleSetupSubmission.bind(this);
-
+    this.handlePlayerClick = this.handlePlayerClick.bind(this);
   }
 
   handleStartMenuClick() {
@@ -329,22 +329,27 @@ class App extends React.Component {
     switch(switchCase) {
       case 'computer-patrol':
         alert('hit a patrol');
+        this.NPCpatrol.hit();
         cell.classList.toggle('hit');
         break;
       case 'computer-frigate':
         alert('hit a frigate');
+        this.NPCfrigate.hit();
         cell.classList.toggle('hit');
         break;
       case 'computer-submarine':
         alert('hit a submarine');
+        this.NPCsubmarine.hit();
         cell.classList.toggle('hit');
         break;
       case 'computer-cruiser':
         alert('hit a cruiser');
+        this.NPCcruiser.hit();
         cell.classList.toggle('hit');
         break;
       case 'computer-carrier':
         alert('hit a carrier');
+        this.NPCcarrier.hit();
         cell.classList.toggle('hit');
         break;
       default:
