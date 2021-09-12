@@ -32,6 +32,12 @@ body {
 .gameboard-cell:hover {
   background: lightblue;
 }
+.gameboard-cell.miss {
+  background: blue;
+}
+.gameboard-cell.hit {
+  background: black;
+}
 .player-occupied {
   pointer-events: none;
 }

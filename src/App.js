@@ -259,6 +259,8 @@ class App extends React.Component {
 
     const board = document.querySelector('#computer-container');
     board.classList.toggle('show');
+
+    this.forceUpdate();
   }
 
   canPlace(index) {
@@ -320,8 +322,39 @@ class App extends React.Component {
   }
 
 
-  handlePlayerClick() {
-    alert('player clicked');
+  handlePlayerClick(index) {
+    const cell = document.querySelector(`#computer-${index}`);
+    const switchCase = cell.classList[3];
+
+    switch(switchCase) {
+      case 'computer-patrol':
+        alert('hit a patrol');
+        cell.classList.toggle('hit');
+        break;
+      case 'computer-frigate':
+        alert('hit a frigate');
+        cell.classList.toggle('hit');
+        break;
+      case 'computer-submarine':
+        alert('hit a submarine');
+        cell.classList.toggle('hit');
+        break;
+      case 'computer-cruiser':
+        alert('hit a cruiser');
+        cell.classList.toggle('hit');
+        break;
+      case 'computer-carrier':
+        alert('hit a carrier');
+        cell.classList.toggle('hit');
+        break;
+      default:
+        cell.classList.toggle('miss');
+        break;
+    }
+
+    // add a function checkWin or something that parses
+    // isSunk() of all NPC ships
+    
   }
 
 

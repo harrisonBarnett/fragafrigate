@@ -17,7 +17,6 @@ class Ship {
         var hits = this.hits;
         hits++;
         this.hits = hits;
-        // return this.state.hits;
     }
     isSunk() {
         if(this.hits == this.size) {
