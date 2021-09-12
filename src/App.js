@@ -22,6 +22,12 @@ class App extends React.Component {
     this.cruiser = new Ship('cruiser', 4, []);
     this.carrier = new Ship('carrier', 5, []);
 
+    this.NPCpatrol = new Ship('patrol', 2, []);
+    this.NPCfrigate = new Ship('frigate', 3, []);
+    this.NPCsubmarine = new Ship('submarine', 3, []);
+    this.NPCcruiser = new Ship('cruiser', 4, []);
+    this.NPCcarrier = new Ship('carrier', 5, []);
+
     this.handleStartMenuClick = this.handleStartMenuClick.bind(this);
     this.handleSetupClick = this.handleSetupClick.bind(this);
     this.handleSetupSubmission = this.handleSetupSubmission.bind(this);
@@ -119,7 +125,7 @@ class App extends React.Component {
     setupWindow.classList.toggle('show');
 
     this.renderPlayerBoard();
-
+    this.randomizeComputerBoard();
     this.renderComputerBoard();
   }
   renderPlayerBoard() {
@@ -149,7 +155,66 @@ class App extends React.Component {
     board.classList.toggle('show');
   }
   randomizeComputerBoard() {
-    
+    function getRandomIndex() {
+      var rand = Math.floor(Math.random() * 99);
+      return (rand).toLocaleString('en-US', {minimumIntegerDigits: 2, useGrouping: false});
+    }
+
+    while(this.NPCpatrol.position.length < this.NPCpatrol.size) {
+      var index = getRandomIndex();
+      if(this.canPlace(index) && !this.computerCoords.includes(index) ) {
+        this.NPCpatrol.position.push(index);
+        this.tempSetupArr.push(index);
+        this.computerCoords.push(index);
+      } 
+    }
+    this.tempSetupArr = [];
+    while(this.NPCfrigate.position.length < this.NPCfrigate.size) {
+      var index = getRandomIndex();
+      if(this.canPlace(index) && !this.computerCoords.includes(index) ) {
+        this.NPCfrigate.position.push(index);
+        this.tempSetupArr.push(index);
+        this.computerCoords.push(index);
+      } 
+    }
+    this.tempSetupArr = [];
+    while(this.NPCsubmarine.position.length < this.NPCsubmarine.size) {
+      var index = getRandomIndex();
+      if(this.canPlace(index) && !this.computerCoords.includes(index) ) {
+        this.NPCsubmarine.position.push(index);
+        this.tempSetupArr.push(index);
+        this.computerCoords.push(index);
+      } 
+    }
+    this.tempSetupArr = [];
+    while(this.NPCcruiser.position.length < this.NPCcruiser.size) {
+      var index = getRandomIndex();
+      if(this.canPlace(index) && !this.computerCoords.includes(index) ) {
+        this.NPCcruiser.position.push(index);
+        this.tempSetupArr.push(index);
+        this.computerCoords.push(index);
+      } 
+    }
+    this.tempSetupArr = [];
+    while(this.NPCcarrier.position.length < this.NPCcarrier.size) {
+      var index = getRandomIndex();
+      if(this.canPlace(index) && !this.computerCoords.includes(index) ) {
+        this.NPCcarrier.position.push(index);
+        this.tempSetupArr.push(index);
+        this.computerCoords.push(index);
+      } 
+    }
+    this.tempSetupArr = [];
+
+    if(this.NPCpatrol.position.length !== this.NPCpatrol.size &&
+      this.NPCfrigate.position.length !== this.NPCfrigate.size &&
+      this.NPCsubmarine.position.length !== this.NPCsubmarine.size &&
+      this.NPCcruiser.position.length !== this.NPCcruiser.size &&
+      this.NPCcarrier.position.length !== this.NPCcarrier.size ) {
+        this.randomizeComputerBoard();
+    }
+
+    console.log(this.computerCoords);
   }
   renderComputerBoard() {
     const board = document.querySelector('#computer-container');
