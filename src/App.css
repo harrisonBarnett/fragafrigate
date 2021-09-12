@@ -71,31 +71,28 @@ body {
   transition: all 1s ease;
 }
 /* SETUP PHASE STYLES ============================= */
-.setup-gameboard-container {
-  height: 400px;
-  width: 400px;
-
-  position: absolute;
-  left: 50%;
-  top: 100%;
-  z-index: -1;
-
-  transform: translate(-50%, -50%);
-  opacity: 0;
-  transition: all 1s ease;
-}
+.setup-gameboard-container,
 .setup-gameboard-container.show {
   height: 400px;
   width: 400px;
+  left: 50%;
 
   position: absolute;
-  left: 50%;
+  transform: translate(-50%, -50%);
+  transition: all 1s ease;
+
+}
+.setup-gameboard-container {
+  top: 100%;
+  z-index: -1;
+
+  opacity: 0;
+}
+.setup-gameboard-container.show {
   top: 50%;
   z-index: 1;
 
-  transform: translate(-50%, -50%);
   opacity: 1;
-  transition: all 1s ease;
 }
 .setup-prompt-window {
   position: absolute;
@@ -110,27 +107,46 @@ body {
   transition: all 1s ease;
 }
 
+/* GAME BOARDS ==================================== */
+.computer-gameboard-container,
+.computer-gameboard-container.show {
+  height: 400px;
+  width: 400px;
+  position: absolute;
+  top: 5%;
+  left: 5%;
 
-
-#computer-container {
-  display: none;
+  transition: all 1s ease;
+}
+.computer-gameboard-container {
+  opacity: 0;
+  z-index: -1;
+  transform: translateX(-100%);
 }
 
+.computer-gameboard-container.show {
+  opacity: 1;
+  z-index: 1;
+  transform: translateX(0);
+}
+
+.player-gameboard-container,
+.player-gameboard-container.show {
+  position: absolute;
+  right: 5%;
+  transition: all 1s ease;
+}
 .player-gameboard-container {
   position: absolute;
   z-index: -1;
-  right: 5%;
   top: 100%;
   opacity: 0;
-  transition: all 1s ease;
 }
 
 .player-gameboard-container.show {
   position: absolute;
   z-index: 1;
-  right: 5%;
   top: 5%;
   opacity: 1;
-  transition: all 1s ease;
 }
 

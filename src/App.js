@@ -119,6 +119,8 @@ class App extends React.Component {
     setupWindow.classList.toggle('show');
 
     this.renderPlayerBoard();
+
+    this.renderComputerBoard();
   }
   renderPlayerBoard() {
     this.patrol.position.forEach(position => {
@@ -144,6 +146,13 @@ class App extends React.Component {
 
 
     const board = document.querySelector('#player-container');
+    board.classList.toggle('show');
+  }
+  randomizeComputerBoard() {
+    
+  }
+  renderComputerBoard() {
+    const board = document.querySelector('#computer-container');
     board.classList.toggle('show');
   }
 
