@@ -217,6 +217,32 @@ class App extends React.Component {
     console.log(this.computerCoords);
   }
   renderComputerBoard() {
+    this.NPCpatrol.position.forEach( coord => {
+      const cell = document.querySelector(`#computer-${coord}`);
+      cell.classList.add('computer-occupied');
+      cell.classList.add('computer-patrol');
+    });
+    this.NPCfrigate.position.forEach( coord => {
+      const cell = document.querySelector(`#computer-${coord}`);
+      cell.classList.add('computer-occupied');
+      cell.classList.add('computer-frigate');
+    });
+    this.NPCsubmarine.position.forEach( coord => {
+      const cell = document.querySelector(`#computer-${coord}`);
+      cell.classList.add('computer-occupied');
+      cell.classList.add('computer-submarine');
+    });
+    this.NPCcruiser.position.forEach( coord => {
+      const cell = document.querySelector(`#computer-${coord}`);
+      cell.classList.add('computer-occupied');
+      cell.classList.add('computer-cruiser');
+    });
+    this.NPCcarrier.position.forEach( coord => {
+      const cell = document.querySelector(`#computer-${coord}`);
+      cell.classList.add('computer-occupied');
+      cell.classList.add('computer-carrier');
+    });
+
     const board = document.querySelector('#computer-container');
     board.classList.toggle('show');
   }
@@ -230,7 +256,7 @@ class App extends React.Component {
     // second cell
     } else if (this.tempSetupArr.length === 1) {
       // check wraparounds
-      if((this.tempSetupArr[0].charAt(1) === 9 && index.charAt(1) == 0) ||
+      if((this.tempSetupArr[0].charAt(1) == 9 && index.charAt(1) == 0) ||
          (this.tempSetupArr[0].charAt(1) == 0 && index.charAt(1) == 9 )) {
         return false;
       }
@@ -253,10 +279,14 @@ class App extends React.Component {
 
       // horizontal ship
       if(Math.abs(this.tempSetupArr[0] - this.tempSetupArr[1]) === 1 ) {
-        if( this.tempSetupArr[0] == intIndex + 1 ||
+        if( 
+          (this.tempSetupArr[0] == intIndex + 1 ||
           this.tempSetupArr[0] == intIndex - 1 ||
           this.tempSetupArr[this.tempSetupArr.length - 1] == intIndex + 1 ||
-          this.tempSetupArr[this.tempSetupArr.length - 1] == intIndex - 1 ) {
+          this.tempSetupArr[this.tempSetupArr.length - 1] == intIndex - 1) &&
+          // check wraparound placement
+          (this.tempSetupArr[0].charAt(0) == index.charAt(0)) 
+          ){
             return true;
           }
       // vertical ship

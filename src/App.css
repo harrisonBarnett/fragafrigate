@@ -27,14 +27,17 @@ body {
 
   cursor: pointer;
 
-  border: 1px solid black;
+  border: 1px solid lightgray;
 }
 .gameboard-cell:hover {
   background: lightblue;
 }
-.player-occupied,
-.computer-occupied {
+.player-occupied {
   pointer-events: none;
+}
+/* test test tset test */
+.computer-occupied {
+  border: 1px solid red;
 }
 .player-patrol {
   background: red;
