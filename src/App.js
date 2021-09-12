@@ -35,12 +35,13 @@ class App extends React.Component {
   }
 
   handleStartMenuClick() {
+    // remove start menu elements
     const menu = document.querySelector('.start-menu-container');
     menu.classList.toggle('hide');
 
+    // render setup elements
     const setup = document.querySelector('#setup-container');
     setup.classList.toggle('show');
-
     const setupPromptWindow = document.querySelector('.setup-prompt-window');
     setupPromptWindow.classList.toggle('show');
 
@@ -49,9 +50,7 @@ class App extends React.Component {
 
   handleSetupClick(index) {
     const cell = document.querySelector(`#setup-${index}`);
-
-    console.log(this.state.setupState);
-
+    
     if(this.canPlace(index)) {      
       cell.classList.add('player-occupied');
       this.playerCoords.push(index);
@@ -119,16 +118,20 @@ class App extends React.Component {
   }
 
   handleSetupSubmission() {
+    // remove all setup elements
     const setupBoard = document.querySelector('#setup-container');
     setupBoard.classList.toggle('show');
     const setupWindow = document.querySelector('#setup-prompt-window');
     setupWindow.classList.toggle('show');
 
+    // render the player board
     this.renderPlayerBoard();
+    // randomize the computer board
+    // computer board is rendered within the randomize function
     this.randomizeComputerBoard();
-    this.renderComputerBoard();
   }
   renderPlayerBoard() {
+    // coloring position of player ships
     this.patrol.position.forEach(position => {
       const cell = document.querySelector(`#player-${position}`);
       cell.classList.add('player-patrol');
@@ -150,16 +153,23 @@ class App extends React.Component {
       cell.classList.add('player-carrier');
     });
 
-
+    // disable click on player board
+    const cells = document.querySelectorAll('.player-cell');
+    cells.forEach(cell => {
+      cell.style = 'pointer-events: none;';
+    })
+    // render the player board
     const board = document.querySelector('#player-container');
     board.classList.toggle('show');
   }
   randomizeComputerBoard() {
+    // get a random coordinate 0-99
     function getRandomIndex() {
       var rand = Math.floor(Math.random() * 99);
+      // formatted to 00 format
       return (rand).toLocaleString('en-US', {minimumIntegerDigits: 2, useGrouping: false});
     }
-
+    // automating cell placement per computer ship component
     while(this.NPCpatrol.position.length < this.NPCpatrol.size) {
       var index = getRandomIndex();
       if(this.canPlace(index) && !this.computerCoords.includes(index) ) {
@@ -206,6 +216,8 @@ class App extends React.Component {
     }
     this.tempSetupArr = [];
 
+    // unequal position length and size indicates improper placement
+    // call the function again while condition remains unmet
     if(this.NPCpatrol.position.length !== this.NPCpatrol.size &&
       this.NPCfrigate.position.length !== this.NPCfrigate.size &&
       this.NPCsubmarine.position.length !== this.NPCsubmarine.size &&
@@ -214,9 +226,11 @@ class App extends React.Component {
         this.randomizeComputerBoard();
     }
 
-    console.log(this.computerCoords);
+    this.renderComputerBoard();
+
   }
   renderComputerBoard() {
+    // setting classes for each cell per computer ship component
     this.NPCpatrol.position.forEach( coord => {
       const cell = document.querySelector(`#computer-${coord}`);
       cell.classList.add('computer-occupied');
@@ -248,6 +262,7 @@ class App extends React.Component {
   }
 
   canPlace(index) {
+    // used for numerical comparisons
     const intIndex = parseInt(index);
 
     // first cell
@@ -280,6 +295,7 @@ class App extends React.Component {
       // horizontal ship
       if(Math.abs(this.tempSetupArr[0] - this.tempSetupArr[1]) === 1 ) {
         if( 
+          // check left and right of the beginning and end of array
           (this.tempSetupArr[0] == intIndex + 1 ||
           this.tempSetupArr[0] == intIndex - 1 ||
           this.tempSetupArr[this.tempSetupArr.length - 1] == intIndex + 1 ||
@@ -291,6 +307,7 @@ class App extends React.Component {
           }
       // vertical ship
       } else {
+        // check above and below of the beginnign and end of array
         if(this.tempSetupArr[0] == intIndex + 10 ||
           this.tempSetupArr[0] == intIndex - 10 ||
           this.tempSetupArr[this.tempSetupArr.length - 1] == intIndex + 10 ||
@@ -324,8 +341,7 @@ class App extends React.Component {
       />
 
       <Board 
-      boardType='player'
-      handleCellClick={ null }/>
+      boardType='player'/>
 
       <Board 
       boardType='computer'

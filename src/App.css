@@ -135,6 +135,8 @@ body {
 
 .player-gameboard-container,
 .player-gameboard-container.show {
+  height: 200px;
+  width: 200px;
   position: absolute;
   right: 5%;
   transition: all 1s ease;
