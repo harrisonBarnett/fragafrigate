@@ -393,11 +393,11 @@ class App extends React.Component {
 
   computerMove() {
     var index = Math.floor(Math.random() * 99).toLocaleString('en-US', {minimumIntegerDigits: 2, useGrouping: false});
+    const cell = document.querySelector(`#player-${index}`);
+    const cellType = cell.classList[2];
 
     if(!this.computerGuesses.includes(index)) {
-      const cell = document.querySelector(`#player-${index}`);
       if(this.playerCoords.includes(index)) {
-        const cellType = cell.classList[3];
         switch(cellType) {
           case 'player-patrol':
             this.patrol.hit();
@@ -426,7 +426,8 @@ class App extends React.Component {
     } else {
       this.computerMove();
     }
-
+    // check the isSunk condition of the cell
+    this.checkShip('computer', cellType);
     // check the win condition after every move
     this.checkWin('computer');
   }
