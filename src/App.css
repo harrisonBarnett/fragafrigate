@@ -34,9 +34,11 @@ body {
 }
 .gameboard-cell.miss {
   background: blue;
+  pointer-events: none;
 }
 .gameboard-cell.hit {
   background: black;
+  pointer-events: none;
 }
 .player-occupied {
   pointer-events: none;

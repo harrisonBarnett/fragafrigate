@@ -12,9 +12,12 @@ class App extends React.Component {
     this.state = {
       setupState: null
     }
+    // temp and reference coordinate arrays
     this.tempSetupArr = [];
     this.playerCoords = [];
     this.computerCoords = [];
+
+    this.computerGuesses = [];
 
     this.patrol = new Ship('patrol', 2, []);
     this.frigate = new Ship('frigate', 3, []);
@@ -356,10 +359,76 @@ class App extends React.Component {
         cell.classList.toggle('miss');
         break;
     }
+    // check the isSunk condition of the cell
+    this.checkShip('player', switchCase);
+    // check the win condition after every click
+    this.checkWin('player');
+    // follow up win condition check with computer move
+    this.computerMove(); 
+  }
 
-    // add a function checkWin or something that parses
-    // isSunk() of all NPC ships
-    
+  checkShip(user, shipType) {
+    // check if player sunk the computer's ship
+    if(user === 'player') {
+      switch(shipType) {
+        case 'computer-patrol':
+          if(this.NPCpatrol.isSunk()) {
+            alert('sunk computer patrol boat');
+          }
+      }
+    // check if computer sunk the player's ship
+    } else {
+      switch(shipType) {
+        case 'player-patrol':
+          if(this.patrol.isSunk()) {
+            alert('sunk player patrol boat');
+          }
+      }
+    }
+  }
+
+  checkWin(user) {
+    return //
+  }
+
+  computerMove() {
+    var index = Math.floor(Math.random() * 99).toLocaleString('en-US', {minimumIntegerDigits: 2, useGrouping: false});
+
+    if(!this.computerGuesses.includes(index)) {
+      const cell = document.querySelector(`#player-${index}`);
+      if(this.playerCoords.includes(index)) {
+        const cellType = cell.classList[3];
+        switch(cellType) {
+          case 'player-patrol':
+            this.patrol.hit();
+            break;
+          case 'player-frigate':
+            this.frigate.hit();
+            break;
+          case 'player-submarine':
+            this.submarine.hit();
+            break;
+          case 'player-cruiser':
+            this.cruiser.hit();
+            break;
+          case 'player-carrier':
+            this.carrier.hit();
+            break;
+          default:
+            break;
+        }
+        cell.classList.toggle('hit');
+      } else {
+        cell.classList.toggle('miss');
+      }
+      this.computerGuesses.push(index);
+
+    } else {
+      this.computerMove();
+    }
+
+    // check the win condition after every move
+    this.checkWin('computer');
   }
 
 
