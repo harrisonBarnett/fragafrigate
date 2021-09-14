@@ -12,7 +12,7 @@ class GameOverPrompt extends React.Component {
                 id='game-over-container'
                 className='game-over-container'
                 >
-                    <h1>this is the game over container</h1>
+                    <h1>{this.props.winner} won!</h1>
                     <button
                     id='game-over-button'
                     onClick={()=>{this.props.handleGameOverClick()}}>restart</button>

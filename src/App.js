@@ -439,7 +439,7 @@ class App extends React.Component {
         this.NPCsubmarine.isSunk() &&
         this.NPCcruiser.isSunk() &&
         this.NPCcarrier.isSunk() ){
-          this.setState({ winner: 'player' });
+          this.setState({ winner: 'you' });
           this.gameOver('player');
       } else {
         return;
@@ -506,7 +506,7 @@ class App extends React.Component {
   }
 
   handleGameOverClick() {
-    alert('restarting the game');
+    window.location.reload(true);
   }
 
   render() {
