@@ -162,4 +162,21 @@ body {
   top: 5%;
   opacity: 1;
 }
+/* GAME OVER PROMPT */
+.game-over-container,
+.game-over-container.show {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border: 1px solid red;
 
+}
+.game-over-container {
+  display: none;
+  z-index: -1;
+}
+.game-over-container.show {
+  display: block;
+  z-index: 1;
+}

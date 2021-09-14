@@ -2,6 +2,7 @@ import React from 'react';
 import Board from './Board';
 import Ship from './Ship';
 import SetupPrompt from './SetupPrompt';
+import GameOverPrompt from './GameOverPrompt';
 
 import './App.css';
 
@@ -10,7 +11,8 @@ class App extends React.Component {
     super(props);
 
     this.state = {
-      setupState: null
+      setupState: null,
+      winner: null
     }
     // temp and reference coordinate arrays
     this.tempSetupArr = [];
@@ -35,6 +37,7 @@ class App extends React.Component {
     this.handleSetupClick = this.handleSetupClick.bind(this);
     this.handleSetupSubmission = this.handleSetupSubmission.bind(this);
     this.handlePlayerClick = this.handlePlayerClick.bind(this);
+    this.handleGameOverClick = this.handleGameOverClick.bind(this);
   }
 
   handleStartMenuClick() {
@@ -436,7 +439,8 @@ class App extends React.Component {
         this.NPCsubmarine.isSunk() &&
         this.NPCcruiser.isSunk() &&
         this.NPCcarrier.isSunk() ){
-          alert('congrats, you won the game, cool');
+          this.setState({ winner: 'player' });
+          this.gameOver('player');
       } else {
         return;
       }
@@ -447,11 +451,17 @@ class App extends React.Component {
         this.submarine.isSunk() &&
         this.cruiser.isSunk() &&
         this.carrier.isSunk() ){
-          alert('congrats, you lost the game, sucks');
+          this.setState({ winner: 'computer' });
+          this.gameOver('computer');
       } else {
         return;
       }
     }
+  }
+
+  gameOver(user) {
+    const gameOverPrompt = document.querySelector('#game-over-container');
+    gameOverPrompt.classList.toggle('show');
   }
 
   computerMove() {
@@ -495,6 +505,9 @@ class App extends React.Component {
     this.checkWin('computer');
   }
 
+  handleGameOverClick() {
+    alert('restarting the game');
+  }
 
   render() {
     return(
@@ -517,6 +530,12 @@ class App extends React.Component {
       <Board 
       boardType='computer'
       handleCellClick= { this.handlePlayerClick }/>
+
+      <GameOverPrompt 
+      winner={this.state.winner}
+      handleGameOverClick={this.handleGameOverClick}
+      />
+
       </>
     )
   }
