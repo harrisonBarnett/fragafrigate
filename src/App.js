@@ -331,27 +331,22 @@ class App extends React.Component {
 
     switch(switchCase) {
       case 'computer-patrol':
-        alert('hit a patrol');
         this.NPCpatrol.hit();
         cell.classList.toggle('hit');
         break;
       case 'computer-frigate':
-        alert('hit a frigate');
         this.NPCfrigate.hit();
         cell.classList.toggle('hit');
         break;
       case 'computer-submarine':
-        alert('hit a submarine');
         this.NPCsubmarine.hit();
         cell.classList.toggle('hit');
         break;
       case 'computer-cruiser':
-        alert('hit a cruiser');
         this.NPCcruiser.hit();
         cell.classList.toggle('hit');
         break;
       case 'computer-carrier':
-        alert('hit a carrier');
         this.NPCcarrier.hit();
         cell.classList.toggle('hit');
         break;
@@ -375,6 +370,29 @@ class App extends React.Component {
           if(this.NPCpatrol.isSunk()) {
             alert('sunk computer patrol boat');
           }
+          break;
+        case 'computer-frigate':
+          if(this.NPCfrigate.isSunk()) {
+            alert('sunk computer frigate boat');
+          }
+          break;
+        case 'computer-submarine':
+          if(this.NPCsubmarine.isSunk()) {
+            alert('sunk computer submarine boat');
+          }
+          break;
+        case 'computer-cruiser':
+          if(this.NPCcruiser.isSunk()) {
+            alert('sunk computer cruiser boat');
+          }
+          break;
+        case 'computer-carrier':
+          if(this.NPCcarrier.isSunk()) {
+            alert('sunk computer carrier boat');
+          }
+          break;
+        default:
+          break;
       }
     // check if computer sunk the player's ship
     } else {
@@ -383,12 +401,57 @@ class App extends React.Component {
           if(this.patrol.isSunk()) {
             alert('sunk player patrol boat');
           }
+          break;
+        case 'player-frigate':
+          if(this.frigate.isSunk()) {
+            alert('sunk player frigate boat');
+          }
+          break;
+        case 'player-submarine':
+          if(this.submarine.isSunk()) {
+            alert('sunk player submarine boat');
+          }
+          break;
+        case 'player-cruiser':
+          if(this.cruiser.isSunk()) {
+            alert('sunk player cruiser boat');
+          }
+          break;
+        case 'player-carrier':
+          if(this.carrier.isSunk()) {
+            alert('sunk player carrier boat');
+          }
+          break;
+        default:
+          break;
       }
     }
   }
 
   checkWin(user) {
-    return //
+    if(user === 'player') {
+      if
+        (this.NPCpatrol.isSunk() &&
+        this.NPCfrigate.isSunk() &&
+        this.NPCsubmarine.isSunk() &&
+        this.NPCcruiser.isSunk() &&
+        this.NPCcarrier.isSunk() ){
+          alert('congrats, you won the game, cool');
+      } else {
+        return;
+      }
+    } else if (user === 'computer') {
+      if
+        (this.patrol.isSunk() &&
+        this.frigate.isSunk() &&
+        this.submarine.isSunk() &&
+        this.cruiser.isSunk() &&
+        this.carrier.isSunk() ){
+          alert('congrats, you lost the game, sucks');
+      } else {
+        return;
+      }
+    }
   }
 
   computerMove() {
