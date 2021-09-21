@@ -1,6 +1,6 @@
 {
   "files": {
-    "main.css": "/fragafrigate/static/css/main.eac6a914.chunk.css",
+    "main.css": "/fragafrigate/static/css/main.959d99ab.chunk.css",
     "main.js": "/fragafrigate/static/js/main.05f1ea44.chunk.js",
     "main.js.map": "/fragafrigate/static/js/main.05f1ea44.chunk.js.map",
     "runtime-main.js": "/fragafrigate/static/js/runtime-main.a1b4ace3.js",
@@ -10,13 +10,13 @@
     "static/js/3.a19140ad.chunk.js": "/fragafrigate/static/js/3.a19140ad.chunk.js",
     "static/js/3.a19140ad.chunk.js.map": "/fragafrigate/static/js/3.a19140ad.chunk.js.map",
     "index.html": "/fragafrigate/index.html",
-    "static/css/main.eac6a914.chunk.css.map": "/fragafrigate/static/css/main.eac6a914.chunk.css.map",
+    "static/css/main.959d99ab.chunk.css.map": "/fragafrigate/static/css/main.959d99ab.chunk.css.map",
     "static/js/2.c208c4a8.chunk.js.LICENSE.txt": "/fragafrigate/static/js/2.c208c4a8.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
     "static/js/runtime-main.a1b4ace3.js",
     "static/js/2.c208c4a8.chunk.js",
-    "static/css/main.eac6a914.chunk.css",
+    "static/css/main.959d99ab.chunk.css",
     "static/js/main.05f1ea44.chunk.js"
   ]
 }
