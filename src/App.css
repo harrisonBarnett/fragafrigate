@@ -44,8 +44,8 @@ body {
   pointer-events: none;
 }
 /* test test tset test */
-.computer-occupied {
-}
+/* .computer-occupied {
+} */
 .player-patrol {
   background: red;
 }
