@@ -13,7 +13,9 @@ class SetupPrompt extends React.Component {
             className='setup-prompt-window'>
                 <h1>place your {this.props.setupState}</h1>
                 <button
-                onClick={() => {this.props.handleSubmitClick()}}>submit your board</button>
+                id="setup-submission-btn"
+                onClick={() => {this.props.handleSubmitClick()}}
+                >submit your board</button>
             </div>
             </>
         )

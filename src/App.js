@@ -58,6 +58,10 @@ class App extends React.Component {
     setupPromptWindow.classList.toggle('show');
 
     this.setState({ setupState: 'patrol' });
+
+    // disable the submission button
+    const button = document.querySelector('#setup-submission-btn');
+    button.disabled = true;
   }
 
   handleSetupClick(index) {
@@ -117,6 +121,14 @@ class App extends React.Component {
           if(this.carrier.position.length === this.carrier.size) {
             this.tempSetupArr = [];
             alert('setup complete');
+            // disable the setup board
+            const cells = document.querySelectorAll('.setup-cell');
+            cells.forEach(cell => {
+              cell.classList.toggle('unclickable');
+            });
+            // enable the submission button
+            const button = document.querySelector('#setup-submission-btn');
+            button.disabled = false;
           }
           break;
         default: 
@@ -248,7 +260,6 @@ class App extends React.Component {
       }
       this.tempSetupArr = [];
     }
-
     // unequal position length and size indicates improper placement
     // call the function again while condition remains unmet
     if(this.NPCpatrol.position.length !== this.NPCpatrol.size ||

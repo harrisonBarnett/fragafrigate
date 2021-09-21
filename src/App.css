@@ -90,7 +90,6 @@ body {
   position: absolute;
   transform: translate(-50%, -50%);
   transition: all 1s ease;
-
 }
 .setup-gameboard-container {
   top: 100%;
@@ -116,7 +115,9 @@ body {
   opacity: 1;
   transition: all 1s ease;
 }
-
+.setup-cell.unclickable {
+  pointer-events: none;
+}
 /* GAME BOARDS ==================================== */
 .computer-gameboard-container,
 .computer-gameboard-container.show {
