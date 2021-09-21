@@ -45,7 +45,6 @@ body {
 }
 /* test test tset test */
 .computer-occupied {
-  border: 1px solid red;
 }
 .player-patrol {
   background: red;

@@ -17,7 +17,13 @@ class App extends React.Component {
     // temp and reference coordinate arrays
     this.tempSetupArr = [];
     this.playerCoords = [];
-    this.computerCoords = [];
+    this.computerCoords = {
+      patrol: [],
+      frigate: [],
+      submarine: [],
+      cruiser: [],
+      carrier: []
+    };
 
     this.computerGuesses = [];
 
@@ -175,60 +181,86 @@ class App extends React.Component {
       // formatted to 00 format
       return (rand).toLocaleString('en-US', {minimumIntegerDigits: 2, useGrouping: false});
     }
+
     // automating cell placement per computer ship component
     while(this.NPCpatrol.position.length < this.NPCpatrol.size) {
       var index = getRandomIndex();
-      if(this.canPlace(index) && !this.computerCoords.includes(index) ) {
+      if(this.canPlace(index) && !this.computerCoords.patrol.includes(index) ) {
         this.NPCpatrol.position.push(index);
         this.tempSetupArr.push(index);
-        this.computerCoords.push(index);
-      } 
+        this.computerCoords.patrol.push(index);
+      } else {
+        this.NPCpatrol.position = [];
+        this.tempSetupArr = [];
+        this.computerCoords.patrol = [];
+      }
+      this.tempSetupArr = [];
     }
-    this.tempSetupArr = [];
     while(this.NPCfrigate.position.length < this.NPCfrigate.size) {
       var index = getRandomIndex();
-      if(this.canPlace(index) && !this.computerCoords.includes(index) ) {
+      if(this.canPlace(index) && !this.computerCoords.frigate.includes(index) ) {
         this.NPCfrigate.position.push(index);
         this.tempSetupArr.push(index);
-        this.computerCoords.push(index);
-      } 
+        this.computerCoords.frigate.push(index);
+      } else {
+        this.NPCpatrol.position = [];
+        this.tempSetupArr = [];
+        this.computerCoords.patrol = [];
+      }
+      this.tempSetupArr = [];
     }
-    this.tempSetupArr = [];
     while(this.NPCsubmarine.position.length < this.NPCsubmarine.size) {
       var index = getRandomIndex();
-      if(this.canPlace(index) && !this.computerCoords.includes(index) ) {
+      if(this.canPlace(index) && !this.computerCoords.submarine.includes(index) ) {
         this.NPCsubmarine.position.push(index);
         this.tempSetupArr.push(index);
-        this.computerCoords.push(index);
-      } 
+        this.computerCoords.submarine.push(index);
+      } else {
+        this.NPCpatrol.position = [];
+        this.tempSetupArr = [];
+        this.computerCoords.patrol = [];
+      }
+      this.tempSetupArr = [];
     }
-    this.tempSetupArr = [];
     while(this.NPCcruiser.position.length < this.NPCcruiser.size) {
       var index = getRandomIndex();
-      if(this.canPlace(index) && !this.computerCoords.includes(index) ) {
+      if(this.canPlace(index) && !this.computerCoords.cruiser.includes(index) ) {
         this.NPCcruiser.position.push(index);
         this.tempSetupArr.push(index);
-        this.computerCoords.push(index);
-      } 
+        this.computerCoords.cruiser.push(index);
+      } else {
+        this.NPCpatrol.position = [];
+        this.tempSetupArr = [];
+        this.computerCoords.patrol = [];
+      }
+      this.tempSetupArr = [];
     }
-    this.tempSetupArr = [];
     while(this.NPCcarrier.position.length < this.NPCcarrier.size) {
       var index = getRandomIndex();
-      if(this.canPlace(index) && !this.computerCoords.includes(index) ) {
+      if(this.canPlace(index) && !this.computerCoords.carrier.includes(index) ) {
         this.NPCcarrier.position.push(index);
         this.tempSetupArr.push(index);
-        this.computerCoords.push(index);
-      } 
+        this.computerCoords.carrier.push(index);
+      } else {
+        this.NPCpatrol.position = [];
+        this.tempSetupArr = [];
+        this.computerCoords.patrol = [];
+      }
+      this.tempSetupArr = [];
     }
-    this.tempSetupArr = [];
 
     // unequal position length and size indicates improper placement
     // call the function again while condition remains unmet
-    if(this.NPCpatrol.position.length !== this.NPCpatrol.size &&
-      this.NPCfrigate.position.length !== this.NPCfrigate.size &&
-      this.NPCsubmarine.position.length !== this.NPCsubmarine.size &&
-      this.NPCcruiser.position.length !== this.NPCcruiser.size &&
+    if(this.NPCpatrol.position.length !== this.NPCpatrol.size ||
+      this.NPCfrigate.position.length !== this.NPCfrigate.size ||
+      this.NPCsubmarine.position.length !== this.NPCsubmarine.size ||
+      this.NPCcruiser.position.length !== this.NPCcruiser.size ||
       this.NPCcarrier.position.length !== this.NPCcarrier.size ) {
+        this.NPCpatrol.position = [];
+        this.NPCfrigate.position = [];
+        this.NPCsubmarine.position = [];
+        this.NPCcruiser.position = [];
+        this.NPCcarrier.position = [];
         this.randomizeComputerBoard();
     }
 
@@ -371,27 +403,27 @@ class App extends React.Component {
       switch(shipType) {
         case 'computer-patrol':
           if(this.NPCpatrol.isSunk()) {
-            alert('sunk computer patrol boat');
+            alert('sunk computer patrol');
           }
           break;
         case 'computer-frigate':
           if(this.NPCfrigate.isSunk()) {
-            alert('sunk computer frigate boat');
+            alert('sunk computer frigate');
           }
           break;
         case 'computer-submarine':
           if(this.NPCsubmarine.isSunk()) {
-            alert('sunk computer submarine boat');
+            alert('sunk computer submarine');
           }
           break;
         case 'computer-cruiser':
           if(this.NPCcruiser.isSunk()) {
-            alert('sunk computer cruiser boat');
+            alert('sunk computer cruiser');
           }
           break;
         case 'computer-carrier':
           if(this.NPCcarrier.isSunk()) {
-            alert('sunk computer carrier boat');
+            alert('sunk computer carrier');
           }
           break;
         default:
