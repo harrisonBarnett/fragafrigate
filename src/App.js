@@ -17,13 +17,7 @@ class App extends React.Component {
     // temp and reference coordinate arrays
     this.tempSetupArr = [];
     this.playerCoords = [];
-    this.computerCoords = {
-      patrol: [],
-      frigate: [],
-      submarine: [],
-      cruiser: [],
-      carrier: []
-    };
+    this.cpuCoords = [];
 
     this.computerGuesses = [];
 
@@ -59,9 +53,10 @@ class App extends React.Component {
 
     this.setState({ setupState: 'patrol' });
 
+    // UNCOMMENT THIS BEFORE PROD
     // disable the submission button
-    const button = document.querySelector('#setup-submission-btn');
-    button.disabled = true;
+    // const button = document.querySelector('#setup-submission-btn');
+    // button.disabled = true;
   }
 
   handleSetupClick(index) {
@@ -186,95 +181,301 @@ class App extends React.Component {
     const board = document.querySelector('#player-container');
     board.classList.toggle('show');
   }
+  getRandomIndex() {
+    var rand = Math.floor(Math.random() * 99);
+    // formatted to 00 format
+    return ('00' + rand).slice(-2);
+  }
+  coinFlip() {
+    return Math.round(Math.random());
+  }
+  placePatrol() {
+    this.NPCpatrol.position = [];
+    this.tempSetupArr = [];
+    const index = this.getRandomIndex();
+    // place first cell
+    if(this.cpuCoords.includes(index)) {
+      this.placePatrol();
+    } else {
+      this.NPCpatrol.position.push(index);
+      this.tempSetupArr.push(index);
+    }
+
+    if(this.coinFlip() == 0) {
+      // place horizontally 
+      // check lateral wraparound
+      while(this.NPCpatrol.position.length < 2) {
+        if(this.NPCpatrol.position[this.NPCpatrol.position.length - 1].charAt(1) == 9) {
+          this.placePatrol();
+        } 
+        const nextIndex = parseInt(this.NPCpatrol.position[this.NPCpatrol.position.length - 1]) + 1;
+        const strIndex = ('00' + nextIndex).slice(-2);
+        if(this.canPlace(strIndex)) {
+          this.NPCpatrol.position.push(strIndex);
+          this.tempSetupArr.push(strIndex);
+        } else {
+          this.placePatrol();
+        }
+      }
+      
+    } else {
+      // place veritcally
+      // check vertical wraparound
+      while(this.NPCpatrol.position.length < 2) {
+        if(this.NPCpatrol.position[this.NPCpatrol.position.length - 1].charAt(0) == 9) {
+          this.placePatrol();
+        } 
+        const nextIndex = parseInt(this.NPCpatrol.position[this.NPCpatrol.position.length - 1]) + 1;
+        const strIndex = ('00' + nextIndex).slice(-2);
+        if(this.canPlace(strIndex)) {
+          this.NPCpatrol.position.push(strIndex);
+          this.tempSetupArr.push(strIndex);
+        } else {
+          this.placePatrol();
+        }
+      }
+    }
+    if(this.NPCpatrol.position.length != 2) {
+      this.placePatrol();
+    }
+    this.NPCpatrol.position.forEach(coord => {
+      this.cpuCoords.push(coord);
+    });
+  }
+  placeFrigate() {
+    this.NPCfrigate.position = [];
+    this.tempSetupArr = [];
+    const index = this.getRandomIndex();
+    // place first cell
+    if(this.cpuCoords.includes(index)) {
+      this.placeFrigate();
+    } else {
+      this.NPCfrigate.position.push(index);
+      this.tempSetupArr.push(index);
+    }
+
+    if(this.coinFlip() == 0) {
+      // place horizontally 
+      // check lateral wraparound
+      while(this.NPCfrigate.position.length < 3) {
+        if(this.NPCfrigate.position[this.NPCfrigate.position.length - 1].charAt(1) == 9) {
+          this.placeFrigate();
+        } 
+        const nextIndex = parseInt(this.NPCfrigate.position[this.NPCfrigate.position.length - 1]) + 1;
+        const strIndex = ('00' + nextIndex).slice(-2);
+        if(this.canPlace(strIndex)) {
+          this.NPCfrigate.position.push(strIndex);
+          this.tempSetupArr.push(strIndex);
+        } else {
+          this.placeFrigate();
+        }
+      }
+      
+    } else {
+      // place veritcally
+      // check vertical wraparound
+      while(this.NPCfrigate.position.length < 3) {
+        if(this.NPCfrigate.position[this.NPCfrigate.position.length - 1].charAt(0) == 9) {
+          this.placeFrigate();
+        } 
+        const nextIndex = parseInt(this.NPCfrigate.position[this.NPCfrigate.position.length - 1]) + 1;
+        const strIndex = ('00' + nextIndex).slice(-2);
+        if(this.canPlace(strIndex)) {
+          this.NPCfrigate.position.push(strIndex);
+          this.tempSetupArr.push(strIndex);
+        } else {
+          this.placeFrigate();
+        }
+      }
+    }
+    if(this.NPCfrigate.position.length != 3) {
+      this.placeFrigate();
+    }
+    this.NPCfrigate.position.forEach(coord => {
+      this.cpuCoords.push(coord);
+    });
+  }
+  placeSubmarine() {
+    this.NPCsubmarine.position = [];
+    this.tempSetupArr = [];
+    const index = this.getRandomIndex();
+    // place first cell
+    if(this.cpuCoords.includes(index)) {
+      this.placeSubmarine();
+    } else {
+      this.NPCsubmarine.position.push(index);
+      this.tempSetupArr.push(index);
+    }
+
+    if(this.coinFlip() == 0) {
+      // place horizontally 
+      // check lateral wraparound
+      while(this.NPCsubmarine.position.length < 3) {
+        if(this.NPCsubmarine.position[this.NPCsubmarine.position.length - 1].charAt(1) == 9) {
+          this.placeSubmarine();
+        } 
+        const nextIndex = parseInt(this.NPCsubmarine.position[this.NPCsubmarine.position.length - 1]) + 1;
+        const strIndex = ('00' + nextIndex).slice(-2);
+        if(this.canPlace(strIndex)) {
+          this.NPCsubmarine.position.push(strIndex);
+          this.tempSetupArr.push(strIndex);
+        } else {
+          this.placeSubmarine();
+        }
+      }
+      
+    } else {
+      // place veritcally
+      // check vertical wraparound
+      while(this.NPCsubmarine.position.length < 3) {
+        if(this.NPCsubmarine.position[this.NPCsubmarine.position.length - 1].charAt(0) == 9) {
+          this.placeSubmarine();
+        } 
+        const nextIndex = parseInt(this.NPCsubmarine.position[this.NPCsubmarine.position.length - 1]) + 1;
+        const strIndex = ('00' + nextIndex).slice(-2);
+        if(this.canPlace(strIndex)) {
+          this.NPCsubmarine.position.push(strIndex);
+          this.tempSetupArr.push(strIndex);
+        } else {
+          this.placeSubmarine();
+        }
+      }
+    }
+
+    if(this.NPCsubmarine.position.length != 3) {
+      this.placeSubmarine();
+    }
+
+    this.NPCsubmarine.position.forEach(coord => {
+      this.cpuCoords.push(coord);
+    });
+  }
+  placeCruiser() {
+    this.NPCcruiser.position = [];
+    this.tempSetupArr = [];
+    const index = this.getRandomIndex();
+    // place first cell
+    if(this.cpuCoords.includes(index)) {
+      this.placeCruiser();
+    } else {
+      this.NPCcruiser.position.push(index);
+      this.tempSetupArr.push(index);
+    }
+
+    if(this.coinFlip() == 0) {
+      // place horizontally 
+      // check lateral wraparound
+      while(this.NPCcruiser.position.length < 4) {
+        if(this.NPCcruiser.position[this.NPCcruiser.position.length - 1].charAt(1) == 9) {
+          this.placeCruiser();
+        } 
+        const nextIndex = parseInt(this.NPCcruiser.position[this.NPCcruiser.position.length - 1]) + 1;
+        const strIndex = ('00' + nextIndex).slice(-2);
+        if(this.canPlace(strIndex)) {
+          this.NPCcruiser.position.push(strIndex);
+          this.tempSetupArr.push(strIndex);
+        } else {
+          this.placeCruiser();
+        }
+      }
+      
+    } else {
+      // place veritcally
+      // check vertical wraparound
+      while(this.NPCcruiser.position.length < 4) {
+        if(this.NPCcruiser.position[this.NPCcruiser.position.length - 1].charAt(0) == 9) {
+          this.placeCruiser();
+        } 
+        const nextIndex = parseInt(this.NPCcruiser.position[this.NPCcruiser.position.length - 1]) + 1;
+        const strIndex = ('00' + nextIndex).slice(-2);
+        if(this.canPlace(strIndex)) {
+          this.NPCcruiser.position.push(strIndex);
+          this.tempSetupArr.push(strIndex);
+        } else {
+          this.placeCruiser();
+        }
+      }
+    }
+
+    if(this.NPCcruiser.position.length != 4) {
+      this.placeCruiser();
+    }
+
+    this.NPCcruiser.position.forEach(coord => {
+      this.cpuCoords.push(coord);
+    });
+  }
+  placeCarrier() {
+    this.NPCcarrier.position = [];
+    this.tempSetupArr = [];
+    const index = this.getRandomIndex();
+    // place first cell
+    if(this.cpuCoords.includes(index)) {
+      this.placeCarrier();
+    } else {
+      this.NPCcarrier.position.push(index);
+      this.tempSetupArr.push(index);
+    }
+
+    if(this.coinFlip() == 0) {
+      // place horizontally 
+      // check lateral wraparound
+      while(this.NPCcarrier.position.length < 5) {
+        if(this.NPCcarrier.position[this.NPCcarrier.position.length - 1].charAt(1) == 9) {
+          this.placeCarrier();
+        } 
+        const nextIndex = parseInt(this.NPCcarrier.position[this.NPCcarrier.position.length - 1]) + 1;
+        const strIndex = ('00' + nextIndex).slice(-2);
+        if(this.canPlace(strIndex)) {
+          this.NPCcarrier.position.push(strIndex);
+          this.tempSetupArr.push(strIndex);
+        } else {
+          this.placeCarrier();
+        }
+      }
+      
+    } else {
+      // place veritcally
+      // check vertical wraparound
+      while(this.NPCcarrier.position.length < 5) {
+        if(this.NPCcarrier.position[this.NPCcarrier.position.length - 1].charAt(0) == 9) {
+          this.placeCarrier();
+        } 
+        const nextIndex = parseInt(this.NPCcarrier.position[this.NPCcarrier.position.length - 1]) + 1;
+        const strIndex = ('00' + nextIndex).slice(-2);
+        if(this.canPlace(strIndex)) {
+          this.NPCcarrier.position.push(strIndex);
+          this.tempSetupArr.push(strIndex);
+        } else {
+          this.placeCarrier();
+        }
+      }
+    }
+
+    if(this.NPCcarrier.position.length != 5) {
+      this.placeCarrier();
+    }
+
+    this.NPCcarrier.position.forEach(coord => {
+      this.cpuCoords.push(coord);
+    });
+  }
   randomizeComputerBoard() {
-    // get a random coordinate 0-99
-    function getRandomIndex() {
-      var rand = Math.floor(Math.random() * 99);
-      // formatted to 00 format
-      return (rand).toLocaleString('en-US', {minimumIntegerDigits: 2, useGrouping: false});
-    }
 
-    // automating cell placement per computer ship component
-    while(this.NPCpatrol.position.length < this.NPCpatrol.size) {
-      var index = getRandomIndex();
-      if(this.canPlace(index) && !this.computerCoords.patrol.includes(index) ) {
-        this.NPCpatrol.position.push(index);
-        this.tempSetupArr.push(index);
-        this.computerCoords.patrol.push(index);
-      } else {
-        this.NPCpatrol.position = [];
-        this.tempSetupArr = [];
-        this.computerCoords.patrol = [];
-      }
-      this.tempSetupArr = [];
-    }
-    while(this.NPCfrigate.position.length < this.NPCfrigate.size) {
-      var index = getRandomIndex();
-      if(this.canPlace(index) && !this.computerCoords.frigate.includes(index) ) {
-        this.NPCfrigate.position.push(index);
-        this.tempSetupArr.push(index);
-        this.computerCoords.frigate.push(index);
-      } else {
-        this.NPCpatrol.position = [];
-        this.tempSetupArr = [];
-        this.computerCoords.patrol = [];
-      }
-      this.tempSetupArr = [];
-    }
-    while(this.NPCsubmarine.position.length < this.NPCsubmarine.size) {
-      var index = getRandomIndex();
-      if(this.canPlace(index) && !this.computerCoords.submarine.includes(index) ) {
-        this.NPCsubmarine.position.push(index);
-        this.tempSetupArr.push(index);
-        this.computerCoords.submarine.push(index);
-      } else {
-        this.NPCpatrol.position = [];
-        this.tempSetupArr = [];
-        this.computerCoords.patrol = [];
-      }
-      this.tempSetupArr = [];
-    }
-    while(this.NPCcruiser.position.length < this.NPCcruiser.size) {
-      var index = getRandomIndex();
-      if(this.canPlace(index) && !this.computerCoords.cruiser.includes(index) ) {
-        this.NPCcruiser.position.push(index);
-        this.tempSetupArr.push(index);
-        this.computerCoords.cruiser.push(index);
-      } else {
-        this.NPCpatrol.position = [];
-        this.tempSetupArr = [];
-        this.computerCoords.patrol = [];
-      }
-      this.tempSetupArr = [];
-    }
-    while(this.NPCcarrier.position.length < this.NPCcarrier.size) {
-      var index = getRandomIndex();
-      if(this.canPlace(index) && !this.computerCoords.carrier.includes(index) ) {
-        this.NPCcarrier.position.push(index);
-        this.tempSetupArr.push(index);
-        this.computerCoords.carrier.push(index);
-      } else {
-        this.NPCpatrol.position = [];
-        this.tempSetupArr = [];
-        this.computerCoords.patrol = [];
-      }
-      this.tempSetupArr = [];
-    }
-    // unequal position length and size indicates improper placement
-    // call the function again while condition remains unmet
-    if(this.NPCpatrol.position.length !== this.NPCpatrol.size ||
-      this.NPCfrigate.position.length !== this.NPCfrigate.size ||
-      this.NPCsubmarine.position.length !== this.NPCsubmarine.size ||
-      this.NPCcruiser.position.length !== this.NPCcruiser.size ||
-      this.NPCcarrier.position.length !== this.NPCcarrier.size ) {
-        this.NPCpatrol.position = [];
-        this.NPCfrigate.position = [];
-        this.NPCsubmarine.position = [];
-        this.NPCcruiser.position = [];
-        this.NPCcarrier.position = [];
-        this.randomizeComputerBoard();
-    }
+    this.placePatrol();
+    this.placeFrigate();
+    this.placeSubmarine();
+    this.placeCruiser();
+    this.placeCarrier();
 
+    // if(this.NPCcarrier.position.length != 5 ||
+    //   this.NPCcruiser.position.length != 4 ||
+    //   this.NPCsubmarine.position.length != 3 ||
+    //   this.NPCfrigate.position.length != 3 ||
+    //   this.NPCpatrol.position.length != 2 ) {
+    //     this.randomizeComputerBoard();
+    //   }
+    
     this.renderComputerBoard();
 
   }
@@ -313,6 +514,10 @@ class App extends React.Component {
   }
 
   canPlace(index) {
+    // check for randomized computer placement
+    if(this.cpuCoords.includes(index)) {
+      return false;
+    }
     // used for numerical comparisons
     const intIndex = parseInt(index);
 

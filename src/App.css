@@ -44,8 +44,9 @@ body {
   pointer-events: none;
 }
 /* test test tset test */
-/* .computer-occupied {
-} */
+.computer-occupied {
+  border: 1px solid red;
+}
 .player-patrol {
   background: red;
 }
@@ -59,6 +60,22 @@ body {
   background: purple;
 }
 .player-carrier {
+  background: pink;
+}
+
+.computer-patrol {
+  background: red;
+}
+.computer-frigate {
+  background: orange;
+}
+.computer-submarine {
+  background: green;
+}
+.computer-cruiser {
+  background: purple;
+}
+.computer-carrier {
   background: pink;
 }
 /* STARTUP MENU STYLES ---------------------------- */
