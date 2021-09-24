@@ -44,9 +44,9 @@ body {
   pointer-events: none;
 }
 /* test test tset test */
-.computer-occupied {
+/* .computer-occupied {
   border: 1px solid red;
-}
+} */
 .player-patrol {
   background: red;
 }
@@ -63,7 +63,7 @@ body {
   background: pink;
 }
 
-.computer-patrol {
+/* .computer-patrol {
   background: red;
 }
 .computer-frigate {
@@ -77,7 +77,7 @@ body {
 }
 .computer-carrier {
   background: pink;
-}
+} */
 /* STARTUP MENU STYLES ---------------------------- */
 .start-menu-container {
   position: absolute;

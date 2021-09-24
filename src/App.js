@@ -53,10 +53,9 @@ class App extends React.Component {
 
     this.setState({ setupState: 'patrol' });
 
-    // UNCOMMENT THIS BEFORE PROD
     // disable the submission button
-    // const button = document.querySelector('#setup-submission-btn');
-    // button.disabled = true;
+    const button = document.querySelector('#setup-submission-btn');
+    button.disabled = true;
   }
 
   handleSetupClick(index) {
@@ -467,14 +466,6 @@ class App extends React.Component {
     this.placeSubmarine();
     this.placeCruiser();
     this.placeCarrier();
-
-    // if(this.NPCcarrier.position.length != 5 ||
-    //   this.NPCcruiser.position.length != 4 ||
-    //   this.NPCsubmarine.position.length != 3 ||
-    //   this.NPCfrigate.position.length != 3 ||
-    //   this.NPCpatrol.position.length != 2 ) {
-    //     this.randomizeComputerBoard();
-    //   }
     
     this.renderComputerBoard();
 
